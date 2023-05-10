@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Schermtijd</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            #video-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            #video-background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .gif-overlay {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .gif-overlay:first-child {
+                width: 250px;
+                height: 250px;
+            }
+
+            .gif-overlay:second-child {
+                width: 150px;
+                height: 150px;
+            }
+
+            #second_gif {
+                display: none;
+            }
+
+            #button-container {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            button {
+                margin-left: 10px;
+                border: none;
+                border-radius: 10px;
+                padding: 10px 20px;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            #left-button {
+                background-color: red;
+                color: white;
+            }
+
+            #right-button {
+                background-color: green;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="video-container">
+            <video id="video-background" autoplay muted loop>
+                <source src="bg.mp4" type="video/mp4">
+            </video>
+            <img class="gif-overlay" id="first_gif" src="Kart_Rijdend.gif">
+            <img class="gif-overlay" id="second_gif" src="Kart_Stilstaand.gif">
+            <div id="button-container">
+                <button id="left-button">STAHP</button>
+                <button id="right-button">Go!</button>
+            </div>
+        </div>
+
+        <script>
+            const video = document.getElementById('video-background');
+            const firstGif = document.getElementById('first_gif');
+            const secondGif = document.getElementById('second_gif');
+            const leftButton = document.getElementById('left-button');
+            const rightButton = document.getElementById('right-button');
+
+            leftButton.addEventListener('click', () => {
+                video.pause();
+                firstGif.style.display = 'none';
+                secondGif.style.display = 'block';
+            });
+
+            rightButton.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    firstGif.style.display = 'block';
+                    secondGif.style.display = 'none';
+                }
+            });
+        </script>
+    </body>
+
+</html>
